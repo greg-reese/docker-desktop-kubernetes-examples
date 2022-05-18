@@ -13,6 +13,11 @@ resource "helm_release" "kubernetes_dashboard" {
   namespace  = kubernetes_namespace.kubernetes_dashboard.id
   repository = "https://kubernetes.github.io/dashboard/"
   chart      = "kubernetes-dashboard"
+
+  set {
+    name="extraArgs[0]"
+    value = "--enable-skip-login"
+  }
 }
 
 resource "kubernetes_service_account" "admin_user" {
